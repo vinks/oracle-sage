@@ -143,7 +143,9 @@ util.resultToJSON = function (result) {
 
     return _bluebird2.default.each(row, function (value, index) {
       var field = result.metaData[index].name;
-      switch (value.constructor.name) {
+      var constructorName = value && value.constructor ? value.constructor.name : '';
+
+      switch (constructorName) {
         case 'Buffer':
           record[field] = value.toString('hex');
           break;
