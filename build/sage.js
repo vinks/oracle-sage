@@ -1,6 +1,6 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _bluebird = require('bluebird');
 
@@ -46,7 +46,7 @@ _simpleOracledb2.default.extend(_oracledb2.default);
 
 var knex = require('knex')({ client: 'oracle' });
 
-var Sage = function () {
+var Sage = (function () {
   function Sage() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -147,27 +147,26 @@ var Sage = function () {
     }
     /**
      Create a sage transaction to perform several operations before commit.
-       You can create transactions either invoking as a Promise, or by passing down
+      You can create transactions either invoking as a Promise, or by passing down
      a function.
-       It is suggested to always pass down a function, as in a function you are forced
+      It is suggested to always pass down a function, as in a function you are forced
      to apply a `commit()` or `rollback()` in order to resolve the promise.
-       The Promise style is available in the event you need a slightly different syntax.
-       Function Style:
-       sage.transaction(function(t) {
+      The Promise style is available in the event you need a slightly different syntax.
+      Function Style:
+      sage.transaction(function(t) {
       User.create({ transaction: t }).then(function() {
         t.commit();
       });
      }).then(function() {
       // transaction done!
      });
-       Promise Style:
-       sage.transaction().then(function(t) {
+      Promise Style:
+      sage.transaction().then(function(t) {
       User.create({ transaction: t }).then(function() {
         t.commit();
       });
      });
-    
-     */
+       */
 
   }, {
     key: 'transaction',
@@ -221,9 +220,9 @@ var Sage = function () {
     key: 'model',
     value: function model(name, schema) {
       if (!schema) {
-        var model = this.models[name];
-        if (model) {
-          return model.model;
+        var _model = this.models[name];
+        if (_model) {
+          return _model.model;
         } else {
           return null;
         }
@@ -266,8 +265,8 @@ var Sage = function () {
         outFormat: self.oracledb.OBJECT
       }, options);
 
-      var connection = void 0;
-      var results = void 0;
+      var connection = undefined;
+      var results = undefined;
       return self.getConnection().then(function (c) {
         return connection = c;
       }).then(function () {
@@ -352,7 +351,7 @@ var Sage = function () {
   }]);
 
   return Sage;
-}();
+})();
 
 var sage = new Sage();
 
