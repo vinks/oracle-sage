@@ -127,6 +127,7 @@ util.resultToJSON = function(result) {
 
     return Promise.each(row, (value, index) => {
       var field = result.metaData[index].name;
+
       var constructorName = value && value.constructor ?
         value.constructor.name : '';
 
